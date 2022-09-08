@@ -1,0 +1,24 @@
+---
+- name: Jenkins playbook
+  hosts: localhost
+  become: yes
+    
+  tasks: 
+    - name: download apt-key
+      ansible.builtin.apt_key:
+        url: https://pkg.jenkins.io/debian-stable/jenkins.io.key
+        state: present
+    - name: add jenkins to repo
+      ansible.builtin.apt_repository:
+        repo: deb https://pkg.jenkins.io/debian-stable binary/
+        filename: jenkins
+        state: present
+    - name: install jenkins and update cache
+      apt:
+        name: jenkins
+        update_cache: yes
+    - name: ensure jenkins is running
+      ansible.builtin.systemd:
+        state: started
+        name: jenkins
+        enabled: yes
