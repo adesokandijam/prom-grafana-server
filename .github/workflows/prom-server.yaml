@@ -94,6 +94,6 @@ jobs:
       - name: running echo1 command
         run: terraform output -json instance_ips
       - name: running echo command
-        run: terraform output -json instance_ips | jq -r '.[]'
+        run: terraform output -json instance_ips | jq -r \'.[]\'
       
       
