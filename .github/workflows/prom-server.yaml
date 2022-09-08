@@ -89,7 +89,7 @@ jobs:
           AWS_ACCESS_KEY_ID: ${{secrets.AWS_ACCESS_KEY_ID}}
           AWS_SECRET_ACCESS_KEY: ${{secrets.AWS_SECRET_ACCESS_KEY}}
       - name: parse ip into static file
-        run: printf "\n$(terraform output -json instance_ips | jq -r '.[]')" >> playbooks/aws_hosts
+        run: echo "\n$(terraform output -json instance_ips | jq -r '.[]')" >> playbooks/aws_hosts
       
       - name: Run playbook
         # env: 
