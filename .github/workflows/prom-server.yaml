@@ -89,9 +89,8 @@ jobs:
           AWS_ACCESS_KEY_ID: ${{secrets.AWS_ACCESS_KEY_ID}}
           AWS_SECRET_ACCESS_KEY: ${{secrets.AWS_SECRET_ACCESS_KEY}}
       - name: print aws_host
-        run: terraform output -json instance_ips | sed 's/[][]//g' | sed 's/\"//g' >> aws_hosts
-      - name: remove 2nd redundant line
-        run: sed '2d' aws_hosts
+        run: |
+          terraform output -json instance_ips | sed 's/[][]//g' | sed 's/\"//g' >> aws_hosts
       - name: print aws_host
         run: cat aws_hosts
       - name: print aws_host
