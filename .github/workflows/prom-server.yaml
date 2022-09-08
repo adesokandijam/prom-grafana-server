@@ -93,5 +93,5 @@ jobs:
         run: printf "\\n$(terraform output -json instance_ips | jq -r '.[]')" >> aws_hosts
 
       - name: running echo command
-        run: cat aws_hosts
+        run: terraform output -json instance_ips | jq -r '.[]'
       
