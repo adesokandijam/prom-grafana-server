@@ -107,7 +107,7 @@ jobs:
           key: ${{secrets.SSH_PRIVATE_KEY}}
           options: |
             --user ubuntu
-            --inventory ../../aws_hosts
+            --inventory "[main] $(terraform output -json instance_ips)"
           # Optional, literal inventory file contents
           # inventory: |
           #   [main]
