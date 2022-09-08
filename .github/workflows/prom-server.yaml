@@ -92,10 +92,6 @@ jobs:
       - name: print aws_host
         run: |
           echo "IP_ADDRESS=$(terraform output -json instance_ips | sed 's/[][]//g' | sed 's/\"//g')" >> $GITHUB_ENV
-      - name: print aws_host
-        run: cat aws_hosts
-      - name: print aws_host
-        run: cat aws_hosts
       
       - name: Run playbook
         uses: dawidd6/action-ansible-playbook@v2
