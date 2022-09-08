@@ -96,12 +96,12 @@ jobs:
 
       
       - name: Run playbook
-        env: 
-          ANSIBLE_CONFIG: playbooks/ansible.cfg
+        # env: 
+        #   ANSIBLE_CONFIG: playbooks/ansible.cfg
         uses: dawidd6/action-ansible-playbook@v2
         with:
           # Required, playbook filepath
-          # playbook: main-playbook.yml
+          playbook: main-playbook.yml
           # Optional, directory where playbooks live
           directory: ./playbooks
           # Optional, SSH private key
