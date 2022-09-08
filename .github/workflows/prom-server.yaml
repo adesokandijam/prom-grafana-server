@@ -101,13 +101,13 @@ jobs:
         uses: dawidd6/action-ansible-playbook@v2
         with:
           # Required, playbook filepath
-          playbook: main-playbook.yml
+          # playbook: main-playbook.yml
           # Optional, directory where playbooks live
           directory: ./playbooks
           # Optional, SSH private key
           key: ${{secrets.SSH_PRIVATE_KEY}}
           options: |
             --user ubuntu
-            --version
+            --inventory aws_hosts
           # Optional, literal inventory file contents
           
