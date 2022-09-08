@@ -1,3 +1,3 @@
-output "public-ip" {
+output "instance_ips" {
   value = module.compute.ip
 }
