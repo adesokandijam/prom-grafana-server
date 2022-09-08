@@ -107,4 +107,5 @@ jobs:
           key: ${{secrets.SSH_PRIVATE_KEY}}
           # Optional, literal inventory file contents
           inventory: |
-            aws_hosts
+            [main]
+            18.135.28.10
