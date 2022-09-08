@@ -90,7 +90,9 @@ jobs:
           AWS_SECRET_ACCESS_KEY: ${{secrets.AWS_SECRET_ACCESS_KEY}}
       - name: print aws_host
         run: |
-          terraform output -json instance_ips | sed 's/[][]//g' | sed 's/\"//g'; echo "IP_ADDRESS=$(terraform output -json instance_ips | sed 's/[][]//g' | sed 's/\"//g')" >> $GITHUB_ENV
+          echo 'IP_ADDRESS<<EOF' >> $GITHUB_ENV
+          terraform output -json instance_ips | sed 's/[][]//g' | sed 's/\"//g' >> $GITHUB_ENV
+          echo ‘EOF’ >> $GITHUB_ENV
       
       - name: Run playbook
         uses: dawidd6/action-ansible-playbook@v2
