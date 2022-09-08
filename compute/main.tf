@@ -33,7 +33,7 @@ resource "aws_instance" "prom-graf-server" {
     command = "printf '\n${self.public_ip}' >> aws_hosts"
   }
 
-  rovisioner "local-exec" {
+  provisioner "local-exec" {
     when    = destroy
     command = "sed -i '/^[0-9]/d' aws_hosts"
   }
