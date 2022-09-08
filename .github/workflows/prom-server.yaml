@@ -92,6 +92,7 @@ jobs:
         id: host
         run: |
           echo "::set-output name=ip_address::$(terraform output -json instance_ips | sed 's/[][]//g' | sed 's/\"//g')"
+          echo ${{steps.host.outputs.ip_address}} >> ip_address
           
           
       
@@ -106,9 +107,10 @@ jobs:
           key: ${{secrets.SSH_PRIVATE_KEY}}
           options: |
             --user ubuntu
+            --version
           #Optional, literal inventory file contents
           inventory: |
             [main]
-            ${{steps.host.outputs.ip_address}}
+            18.135.28.10
             
           
