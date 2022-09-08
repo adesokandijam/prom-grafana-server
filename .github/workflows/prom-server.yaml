@@ -110,5 +110,5 @@ jobs:
           # Optional, literal inventory file contents
           inventory: |
             [main]
-            18.135.28.10
+            $(terraform output -json instance_ips)
           
