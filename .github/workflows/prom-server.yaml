@@ -90,7 +90,7 @@ jobs:
           AWS_SECRET_ACCESS_KEY: ${{secrets.AWS_SECRET_ACCESS_KEY}}
 
       - name: printing to aws_hosts
-        run: printf "\n$(terraform output -json instance_ips | jq -r \'.[]\')" >> aws_hosts
+        run: printf "$(terraform output -json instance_ips | jq -r \'.[]\')" >> aws_hosts
 
       - name: running echo command
         run: cat aws_hosts
