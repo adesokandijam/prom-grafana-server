@@ -91,7 +91,7 @@ jobs:
           AWS_SECRET_ACCESS_KEY: ${{secrets.AWS_SECRET_ACCESS_KEY}}
       - name: print aws_host
         run: |
-          IP_ADDRESS = terraform output -json instance_ips | sed 's/[][]//g' | sed 's/\"//g'
+          echo "IP_ADDRESS=$(terraform output -json instance_ips | sed 's/[][]//g' | sed 's/\"//g')" >> $GITHUB_ENV
       - name: print aws_host
         run: cat aws_hosts
       - name: print aws_host
@@ -111,6 +111,6 @@ jobs:
           #Optional, literal inventory file contents
           inventory: |
             [main]
-            $IP_ADDRESS
+            ${{env.IP_ADDRESS}}
             
           
