@@ -11,6 +11,7 @@ on:
 env:
   AWS_ACCESS_KEY_ID: ${{secrets.AWS_ACCESS_KEY_ID}}
   AWS_SECRET_ACCESS_KEY: ${{secrets.AWS_SECRET_ACCESS_KEY}}
+  IP_ADDRESS: 1
 
 jobs:
   terraform:
@@ -90,7 +91,7 @@ jobs:
           AWS_SECRET_ACCESS_KEY: ${{secrets.AWS_SECRET_ACCESS_KEY}}
       - name: print aws_host
         run: |
-          terraform output -json instance_ips | sed 's/[][]//g' | sed 's/\"//g' >> aws_hosts
+          IP_ADDRESS = terraform output -json instance_ips | sed 's/[][]//g' | sed 's/\"//g'
       - name: print aws_host
         run: cat aws_hosts
       - name: print aws_host
@@ -107,9 +108,9 @@ jobs:
           key: ${{secrets.SSH_PRIVATE_KEY}}
           options: |
             --user ubuntu
-            --inventory-file ../../aws_hosts
-          # Optional, literal inventory file contents
-          # inventory: |
-          #   [main]
-          #   $(terraform output -json instance_ips)
+          #Optional, literal inventory file contents
+          inventory: |
+            [main]
+            $IP_ADDRESS
+            
           
