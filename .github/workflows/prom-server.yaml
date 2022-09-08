@@ -109,7 +109,6 @@ jobs:
           key: ${{secrets.SSH_PRIVATE_KEY}}
           options: |
             --user ubuntu
-            --inventory-file ../../aws_hosts
             --version
 
           # Optional, literal inventory file contents

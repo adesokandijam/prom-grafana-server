@@ -5,8 +5,8 @@ locals {
       description = "public access"
       ingress = {
         ssh = {
-          from        = 22
-          to          = 22
+          from        = 0
+          to          = 0
           protocol    = "tcp"
           cidr_blocks = [var.access_ip]
         }
