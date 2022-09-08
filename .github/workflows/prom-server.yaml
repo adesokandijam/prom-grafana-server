@@ -94,5 +94,7 @@ jobs:
         run: sed '2d' aws_hosts
       - name: print aws_host
         run: cat aws_hosts
+      - name: print aws_host
+        run: cat aws_hosts
       
       
