@@ -7,3 +7,16 @@ module "networking" {
   private_sn_count = var.private_sn_count
   cidr_block = var.cidr_block
 }
+
+module "compute" {
+  source = "./compute"
+
+  instance_count = 1
+  instance_type = "t2.micro"
+  public_sg = module.networking.public_sg
+  public_subnet = module.networking.public_subnet
+  vol_size = 8
+  public_key_path = "prom_server_rsa.pub"
+  key_name = "prom_server_rsa"
+
+}
