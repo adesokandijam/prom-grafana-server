@@ -28,12 +28,12 @@ resource "aws_key_pair" "server_auth" {
 }
 
 resource "aws_instance" "prom-graf-server" {
-  ami = data.aws_ami.ubuntu.id
-  count = var.instance_count
-  instance_type = var.instance_type
-  key_name = aws_key_pair.server_auth.id
+  ami                    = data.aws_ami.ubuntu.id
+  count                  = var.instance_count
+  instance_type          = var.instance_type
+  key_name               = aws_key_pair.server_auth.id
   vpc_security_group_ids = [var.public_sg]
-  subnet_id = var.public_subnet[count.index]
+  subnet_id              = var.public_subnet[count.index]
 
   root_block_device {
     volume_size = var.vol_size
