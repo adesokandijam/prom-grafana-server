@@ -89,11 +89,13 @@ jobs:
           AWS_ACCESS_KEY_ID: ${{secrets.AWS_ACCESS_KEY_ID}}
           AWS_SECRET_ACCESS_KEY: ${{secrets.AWS_SECRET_ACCESS_KEY}}
       - name: parse ip into static file
-        run:  terraform output -json instance_ips | sed 's/[][]//g' | sed 's/\"//g' >> tmp; tail -n 1 tmp >> playbooks/aws_hosts
+        run: 
+          terraform output -json instance_ips | sed 's/[][]//g' | sed 's/\"//g' >> tmp; tail -n 1 tmp >> playbooks/aws_hosts
       
       - name: Run playbook
         # env: 
         #   ANSIBLE_CONFIG: playbooks/ansible.cfg
+        run: cat 
         uses: dawidd6/action-ansible-playbook@v2
         with:
           # Required, playbook filepath
@@ -102,7 +104,7 @@ jobs:
           directory: ./playbooks
           # Optional, SSH private key
           key: ${{secrets.SSH_PRIVATE_KEY}}
-          options: |
+          options:
             --user ubuntu
             --inventory aws_hosts
           # Optional, literal inventory file contents
