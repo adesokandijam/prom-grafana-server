@@ -95,7 +95,6 @@ jobs:
       - name: Run playbook
         # env: 
         #   ANSIBLE_CONFIG: playbooks/ansible.cfg
-        run: cat 
         uses: dawidd6/action-ansible-playbook@v2
         with:
           # Required, playbook filepath
@@ -104,7 +103,7 @@ jobs:
           directory: ./playbooks
           # Optional, SSH private key
           key: ${{secrets.SSH_PRIVATE_KEY}}
-          options:
+          options: |
             --user ubuntu
             --inventory aws_hosts
           # Optional, literal inventory file contents
