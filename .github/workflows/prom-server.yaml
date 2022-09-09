@@ -19,54 +19,31 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
-
-      # - name: Setup Terraform
-      #   uses: hashicorp/setup-terraform@v1
-
-      # - name: Terraform Format
-      #   id: fmt
-      #   run: terraform fmt -check
       - name: install terraform
         run: | 
           wget -O- https://apt.releases.hashicorp.com/gpg | \
           gpg --dearmor | \
           sudo tee /usr/share/keyrings/hashicorp-archive-keyring.gpg
-
           gpg --no-default-keyring \
            --keyring /usr/share/keyrings/hashicorp-archive-keyring.gpg \
           --fingerprint
-
           echo "deb [signed-by=/usr/share/keyrings/hashicorp-archive-keyring.gpg] \
           https://apt.releases.hashicorp.com $(lsb_release -cs) main" | \
           sudo tee /etc/apt/sources.list.d/hashicorp.list
-
           sudo apt update
-
           sudo apt install terraform
-
-
-
-
-
-
-
-
       - name: Terraform Init
         id: init
         run: terraform init
         env:
           AWS_ACCESS_KEY_ID: ${{secrets.AWS_ACCESS_KEY_ID}}
           AWS_SECRET_ACCESS_KEY: ${{secrets.AWS_SECRET_ACCESS_KEY}}
-
-      
       - name: Terraform Validate
         id: validate
         run: terraform validate -no-color
         env:
           AWS_ACCESS_KEY_ID: ${{secrets.AWS_ACCESS_KEY_ID}}
           AWS_SECRET_ACCESS_KEY: ${{secrets.AWS_SECRET_ACCESS_KEY}}
-        
-
       - name: Terraform Plan
         id: plan
         #if: github.event_name == 'pull_request'
@@ -102,22 +79,15 @@ jobs:
       - name: Terraform Plan Status
         if: steps.plan.outcome == 'failure'
         run: exit 1
-
       - name: Terraform Apply
         #if: github.ref == 'refs/heads/main' && github.event_name == 'push'
         run: terraform apply -auto-approve --var-file var.tfvars
         env:
           AWS_ACCESS_KEY_ID: ${{secrets.AWS_ACCESS_KEY_ID}}
           AWS_SECRET_ACCESS_KEY: ${{secrets.AWS_SECRET_ACCESS_KEY}}
-
       - name: parse ip into static file
         run: |
           terraform output -json instance_ips | sed 's/[][]//g' | sed 's/\"//g' >> playbooks/aws_hosts
-      - name: remove redundant line
-        run: sed '/^c/d' playbooks/aws_hosts
-      - name: parse ip into file
-        run: cat playbooks/aws_hosts 
-      
       - name: Run playbook
         # env: 
         #   ANSIBLE_CONFIG: playbooks/ansible.cfg
