@@ -1,8 +1,8 @@
 locals {
   security_groups = {
     ssh = {
-      name        = "public_sg"
-      description = "public access"
+      name        = "ssh_sg"
+      description = "ssh access"
       ingress = {
         ssh = {
           from        = 22
