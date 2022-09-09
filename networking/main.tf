@@ -48,7 +48,7 @@ resource "aws_route_table_association" "public_assoc" {
   route_table_id = aws_route_table.public_rt.id
 }
 
-resource "aws_security_group" "ssh_access" {
+resource "aws_security_group" "all_sg" {
   for_each    = var.security_groups
   name        = each.value.name
   description = each.value.description
@@ -71,3 +71,4 @@ resource "aws_security_group" "ssh_access" {
     cidr_blocks = ["0.0.0.0/0"]
   }
 }
+
