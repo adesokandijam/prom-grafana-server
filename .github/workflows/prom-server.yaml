@@ -94,7 +94,8 @@ jobs:
           echo 'JSON_RESPONSE<<EOF' >> $GITHUB_ENV
           echo $(terraform output -json instance_ips | sed 's/[][]//g' | sed 's/\"//g') >> $GITHUB_ENV
           echo 'EOF' >> $GITHUB_ENV
-          echo "${{ env.JSON_RESPONSE }}" >> playbooks/aws_hosts
+      - name: parse ip into file
+        run: echo "${{ env.JSON_RESPONSE }}" 
       
       - name: Run playbook
         # env: 
