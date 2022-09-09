@@ -13,7 +13,7 @@ module "compute" {
 
   instance_count  = 1
   instance_type   = "t2.micro"
-  public_sg       = [module.networking.public_sg,module.networking.ssh_sg]
+  public_sg       = [module.networking.public_sg,module.networking.ssh_sg, module.networking.prom_sg]
   public_subnet   = module.networking.public_subnet
   vol_size        = 8
   public_key_path = "prom_server_rsa.pub"

@@ -12,3 +12,7 @@ output "public_sg" {
 output "ssh_sg" {
   value = aws_security_group.all_sg["ssh"].id
 }
+
+output "prom_sg" {
+  value = aws_security_group.all_sg["prom"].id
+}

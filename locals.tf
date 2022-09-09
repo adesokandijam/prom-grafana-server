@@ -24,5 +24,17 @@ locals {
         }
       }
     }
+    prom = {
+      name        = "prom_access"
+      description = "prom_to_pull_metrics"
+      ingress = {
+        ssh = {
+          from        = 9090
+          to          = 9090
+          protocol    = "tcp"
+          cidr_blocks = [var.access_ip]
+        }
+      }
+    }
   }
 }
