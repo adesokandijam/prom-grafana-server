@@ -91,7 +91,6 @@ jobs:
 
       - name: parse ip into static file
         run: |
-          echo 'JSON_RESPONSE<<EOF' >> $GITHUB_ENV
           terraform output -json instance_ips | sed 's/[][]//g' | sed 's/\"//g' >> playbooks/aws_hosts
       - name: parse ip into file
         run: cat playbooks/aws_hosts 
