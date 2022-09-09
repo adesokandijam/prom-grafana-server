@@ -9,3 +9,6 @@ output "public_subnet" {
 output "public_sg" {
   value = aws_security_group.all_sg["public"].id
 }
+output "ssh_sg" {
+  value = aws_security_group.all_sg["ssh"].id
+}
