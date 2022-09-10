@@ -1,8 +1,8 @@
 terraform {
     backend "s3" {
-    bucket = "valwitter-prom-server-tfstate"
+    bucket = "valwitter-prom-server"
     key    = "tfstate"
-    region = "eu-west-2"
+    region = "us-east-1"
   }
   required_providers {
     aws = {
@@ -13,5 +13,5 @@ terraform {
 }
 
 provider "aws" {
-  region = "eu-west-2"
+  region = "us-east-1"
 }
