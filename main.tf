@@ -29,3 +29,8 @@ module "loadbalancing" {
   instance_count = 1
   instance_id = module.compute.ids
 }
+
+module "route53" {
+  source = "./route53"
+  lb_dns = module.loadbalancing.lb_dns
+}
