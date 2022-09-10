@@ -6,13 +6,14 @@ output "public_subnet" {
   value = aws_subnet.public_subnet.*.id
 }
 
-output "public_sg" {
-  value = aws_security_group.all_sg["public"].id
+output "lb_sg" {
+  value = aws_security_group.lb_sg.id
 }
-output "ssh_sg" {
+
+output "all_sg" {
   value = aws_security_group.all_sg["ssh"].id
 }
 
-output "prom_sg" {
-  value = aws_security_group.all_sg["prom"].id
+output "server_sg" {
+  value = aws_security_group.server_sg.id
 }

@@ -72,3 +72,47 @@ resource "aws_security_group" "all_sg" {
   }
 }
 
+resource "aws_security_group" "lb_sg" {
+  name        = "alb_sg"
+  description = "Allow HTTP connection"
+  vpc_id      = aws_vpc.main_vpc.id
+
+  ingress {
+    description      = "HHTP from public"
+    from_port        = 80
+    to_port          = 80
+    protocol         = "tcp"
+    cidr_blocks      = ["0.0.0.0/0"]
+  }
+
+  egress {
+    from_port        = 0
+    to_port          = 0
+    protocol         = "-1"
+    cidr_blocks      = ["0.0.0.0/0"]
+  }
+}
+
+
+resource "aws_security_group" "server_sg" {
+  name        = "server_sg"
+  description = "connection of server and lb"
+  vpc_id      = aws_vpc.main_vpc.id
+
+  ingress {
+    description      = "port 3000 from lb"
+    from_port        = 3000
+    to_port          = 3000
+    protocol         = "tcp"
+    security_groups = [aws_security_group.lb_sg.id]
+  }
+
+  egress {
+    from_port        = 0
+    to_port          = 0
+    protocol         = "-1"
+    cidr_blocks      = ["0.0.0.0/0"]
+  }
+}
+
+

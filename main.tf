@@ -13,10 +13,17 @@ module "compute" {
 
   instance_count  = 1
   instance_type   = "t2.micro"
-  public_sg       = [module.networking.public_sg,module.networking.ssh_sg, module.networking.prom_sg]
+  public_sg       = [module.networking.all_sg, module.networking.server_sg]
   public_subnet   = module.networking.public_subnet
   vol_size        = 8
   public_key_path = "prom_server_rsa.pub"
   key_name        = "prom_server_rsa"
 
+}
+
+module "loadbalancing" {
+  source = "./loadbalancing"
+  vpc_id = module.networking.vpc_id
+  public_subnet = module.networking.public_subnet
+  lb_sg = module.networking.lb_sg
 }
