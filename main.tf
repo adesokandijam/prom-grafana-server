@@ -28,6 +28,7 @@ module "loadbalancing" {
   lb_sg = module.networking.lb_sg
   instance_count = 1
   instance_id = module.compute.ids
+  cert_arn = module.route53.cert_arn
 }
 
 module "route53" {

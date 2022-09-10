@@ -31,10 +31,10 @@ resource "aws_lb_target_group_attachment" "instance" {
 
 resource "aws_lb_listener" "front_end" {
   load_balancer_arn = aws_lb.prom_server_lb.arn
-  port              = "80"
-  protocol          = "HTTP"
-#   ssl_policy        = "ELBSecurityPolicy-2016-08"
-#   certificate_arn   = "arn:aws:iam::187416307283:server-certificate/test_cert_rab3wuqwgja25ct3n4jdj2tzu4"
+  port              = "443"
+  protocol          = "HTTPS"
+  ssl_policy        = "ELBSecurityPolicy-2016-08"
+  certificate_arn   = var.cert_arn
 
   default_action {
     type             = "forward"
