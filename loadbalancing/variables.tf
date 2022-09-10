@@ -14,3 +14,7 @@ variable "instance_id" {
 variable "instance_count" {
   
 }
+
+variable "cert_arn" {
+  
+}
