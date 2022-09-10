@@ -9,6 +9,17 @@ resource "aws_lb_target_group" "grafana_tg" {
   port     = 3000
   protocol = "HTTP"
   vpc_id   = var.vpc_id
+  lifecycle {
+    create_before_destroy = true
+    ignore_changes        = [name]
+  }
+  health_check {
+    healthy_threshold   = 2
+    unhealthy_threshold = 2
+    timeout             = 3
+    interval            = 30
+    matcher = "302"
+  }
 }
 
 resource "aws_lb_listener" "front_end" {
