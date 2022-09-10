@@ -15,6 +15,6 @@ variable "instance_count" {
   
 }
 
-variable "cert_arn" {
+# variable "cert_arn" {
   
-}
+# }
