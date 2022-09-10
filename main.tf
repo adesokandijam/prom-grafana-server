@@ -26,4 +26,6 @@ module "loadbalancing" {
   vpc_id = module.networking.vpc_id
   public_subnet = module.networking.public_subnet
   lb_sg = module.networking.lb_sg
+  instance_count = 1
+  instance_id = module.compute.ids
 }
