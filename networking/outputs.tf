@@ -19,5 +19,5 @@ output "server_sg" {
 }
 
 output "http_sg" {
-  value = aws_security_group.lb_sg_http
+  value = aws_security_group.lb_sg_http.id
 }
