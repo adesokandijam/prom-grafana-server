@@ -94,7 +94,7 @@ resource "aws_security_group" "lb_sg" {
 }
 
 resource "aws_security_group" "lb_sg_http" {
-  name        = "alb_sg"
+  name        = "alb_sg_http"
   description = "Allow HTTP connection"
   vpc_id      = aws_vpc.main_vpc.id
 
