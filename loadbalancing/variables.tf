@@ -18,3 +18,7 @@ variable "instance_count" {
 # variable "cert_arn" {
   
 # }
+
+variable "lb_sg_http" {
+  
+}

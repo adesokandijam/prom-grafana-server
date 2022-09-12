@@ -17,3 +17,7 @@ output "all_sg" {
 output "server_sg" {
   value = aws_security_group.server_sg.id
 }
+
+output "http_sg" {
+  value = aws_security_group.lb_sg_http
+}

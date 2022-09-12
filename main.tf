@@ -29,6 +29,7 @@ module "loadbalancing" {
   instance_count = 1
   instance_id = module.compute.ids
   # cert_arn = module.route53.cert_arn
+  lb_sg_http = module.networking.http_sg
 }
 
 module "route53" {
